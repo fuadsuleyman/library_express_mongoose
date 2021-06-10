@@ -1,0 +1,21 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigations.ejs') %>
+    <main>
+        <h1><%= text %></h1>
+        <ul>
+            <% if (genres) { %>
+                <% genres.forEach(genre => { %>
+                    <li>
+                        <a href="<%= genre.url %>"><%= genre.name %></a>
+                    </li>
+                <% }); %> 
+        
+            <% } else { %>
+                <li>There is no genres!</li>
+            <% } %>
+        </ul>
+    </main>
+    
+<%- include('../includes/end.ejs') %> 

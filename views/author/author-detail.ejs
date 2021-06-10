@@ -1,0 +1,43 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigations.ejs') %>
+    <main>
+        <h1><%= text %></h1>
+        <h2>Author: <%= author.name %> </h2>
+        <p>
+            (<span><%= author.date_of_birth_formatted %></span>
+            <% if (author.date_of_death_formatted) { %>
+                <span>- <%= author.date_of_death_formatted %> </span>
+            <% } %>)
+        </p>
+        <h4>Books:</h4>
+        <% if (Object.keys(author_books).length !== 0) { %>
+            <ul>
+                <% author_books.forEach(book => { %>
+                    <li>
+                        <div>
+                            <a href=" <%= book.url %> "><%= book.title %> </a>
+                        </div>
+                        <div>
+                            <p><%= book.summary %> </p>
+                        </div>
+                    </li>
+                <% }) %> 
+            </ul>
+        <% } else if(Object.keys(author_books).length === 0) { %>     
+            <p style="color:red">This author has no books</p>
+        <% } %>
+        <hr>
+        <div style="display: flex;">
+            <p>
+                <a style="margin-right: 1rem;" class="btn" href=" <%= author.url+'/delete' %> ">Delete</a>
+            </p>
+            <p>
+                <a class="btn" href=" <%= author.url+'/update' %> ">Update</a>
+            </p>
+        </div>
+        
+    </main>
+     
+<%- include('../includes/end.ejs') %> 

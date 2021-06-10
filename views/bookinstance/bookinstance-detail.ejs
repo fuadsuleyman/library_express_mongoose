@@ -1,0 +1,50 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigations.ejs') %>
+    <main>
+        <h1><%= text %></h1>
+        <h2>ID: <%= bookinstance._id %> </h2>
+        <p>
+            <strong>
+                <a href=" <%= bookinstance.book.url %> "><%= bookinstance.book.title %></a>
+            </strong>
+        </p>
+        <p>
+            <strong><%= bookinstance.imprint %> </strong>
+        </p>
+        <p>
+            <strong>
+                <% if (bookinstance.status == 'Available') { %>
+                    <span class="text-success"><%= bookinstance.status %> </span>
+                <% } else if (bookinstance.status == 'Maintenance') { %>
+                    <span class="text-danger"><%= bookinstance.status %> </span>
+                <% } else if (bookinstance.status === 'Loaned') { %>
+                    <span class="text-warning"><%= bookinstance.status %> </span>
+                <% } else { %>
+                    <span class="text-reserved"><%= bookinstance.status %> </span>
+                <% } %>
+            </strong>
+        </p>
+        <% if (bookinstance.status !== 'Available') { %>
+            <p>
+                <strong>
+                    Due Back: <%= bookinstance.due_back_formatted %> 
+                </strong>
+            </p>
+        <% } %>
+        <hr>
+        <div style="display: flex;">
+            <p>
+                <a class="btn" style="margin-right: 1rem;" href=" <%= bookinstance.url+'/delete' %> ">Delete</a>
+            </p>
+            <p>
+                <a class="btn" href=" <%= bookinstance.url+'/update' %> ">Update</a>
+            </p>
+        </div>
+        
+    </main>
+
+    
+    
+<%- include('../includes/end.ejs') %> 

@@ -1,0 +1,41 @@
+<%- include('../includes/head.ejs'); %>
+</head>
+<body>
+    <%- include('../includes/navigations.ejs') %>
+<main>
+    <h1><%= pageTitle %></h1>
+
+    <p>
+        <span>
+            <% if (genre_books.length) { %>
+             <p>
+                 <strong style="color: red;">
+                    Delete the following books before attempting to delete this genre.
+                 </strong>
+             </p>
+             <div style='margin-left:20px;margin-top:20px'>
+                <h4>Books:</h4>
+                <ul>
+                    <% genre_books.forEach(book => { %>
+                        <li>
+                            <a href="<%= book.url %>"><%= book.title %> </a>
+                            <p><%= book.summary %> </p>
+                        </li>             
+                    <% }) %>
+                </ul>
+             </div>
+            <% } else { %>
+                <p>Do you really want to delete this (<a href=" <%= genre.url %> "><%= genre.name %></a>) Genre?</p>
+                <form action="" method="POST">
+                    <div class="form-control">
+                        <input type="hidden" required='true' name='genreid' value=<%= genre._id %> >
+                        <button class="btn" type="submit">Delete</button>
+                    </div>
+                </form>
+            <% } %>
+        </span>
+    </p>
+</main>
+    
+    
+<%- include('../includes/end.ejs') %> 

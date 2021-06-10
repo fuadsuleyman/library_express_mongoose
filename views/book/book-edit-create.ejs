@@ -1,0 +1,117 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+<body>
+    <%- include('../includes/navigations.ejs') %>
+    <main>
+        <h1><%= pageTitle %> </h1>
+        <form class="product-form" action="" method="POST">
+            <div class="form-control">
+                <label for="first-name">Title</label>
+                <input type="text" name="title" id="title" placeholder='Book Title...' required='true' value="<% if (editing || errors) { %> <%= book.title %>  <% } %>" >
+                <% if (errors) { %>
+                    <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -5px;">
+                        <li>
+                            <% errors.forEach(error => { %>
+                                <% if (error.param === 'title') { %>
+                                    <div><small><%= error.msg %></small></div>
+                                <% } %>
+                            <% }) %>   
+                        </li>
+                    </ul> 
+                <% } %>
+            </div>
+            <div class="form-control">
+                <label for="author">Author</label>
+                <select type="select" name="author" id="author" placeholder='Select author' required=true>
+                    <% authors.sort(function(a, b) {let textA = a.family_name.toUpperCase(); let textB = b.family_name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;}); %>
+                    <% authors.forEach(author => { %>
+                     <% if (book) { %>
+                      <option value="<%= author._id %>" selected=<%= author._id.toString()===book.author._id.toString() || author._id.toString()===book.author ? 'selected' : false %> ><%=author.name%> </option>
+                     <% } else {%>
+                        <option value="<%= author._id %> %>"> <%= author.name %> </option>
+                        <% } %> 
+                    <% }) %> 
+                </select>
+                <% if (errors) { %>
+                    <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -5px;">
+                        <li>
+                            <% errors.forEach(error => { %>
+                                <% if (error.param === 'author') { %>
+                                    <div><small><%= error.msg %></small></div>
+                                <% } %>
+                            <% }) %>   
+                        </li>
+                    </ul> 
+                <% } %>
+            </div>
+            <div class="form-control">
+                <label for="summary">Summary</label>
+                <textarea type="textarea" placeholder='Summary' required='true' name="summary" id="summary" cols="30" rows="10">
+                    <% if (editing || errors) { %>
+                        <%= book.summary %>
+                    <% } %>
+                </textarea>
+                <% if (errors) { %>
+                    <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -5px;">
+                        <li>
+                            <% errors.forEach(error => { %>
+                                <% if (error.param === 'summary') { %>
+                                    <div><small><%= error.msg %></small></div>
+                                <% } %>
+                            <% }) %>   
+                        </li>
+                    </ul> 
+                <% } %>
+            </div>
+            <div class="form-control">
+                <label for="isbn">ISBN</label>
+                <input type="text" name="isbn" id="isbn" value="<% if (editing || errors) { %> <%= book.isbn %>  <% } %>" >
+                <% if (errors) { %>
+                    <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -5px;">
+                        <li>
+                            <% errors.forEach(error => { %>
+                                <% if (error.param === 'isbn') { %>
+                                    <div><small><%= error.msg %></small></div>
+                                <% } %>
+                            <% }) %>   
+                        </li>
+                    </ul> 
+                <% } %>
+            </div>
+            <div class="form-control">
+                <label for="genre">Genre</label>
+                    <% genres.forEach(genre => { %>
+                        <div style='display: inline; padding-right:10px;'>
+                            <input type="checkbox" name='genre' id=<%= genre._id %> % value=<%= genre._id %> % checked=<%= genre.checked %>>
+                            <label for="<%= genre._id %>">
+                                <%= genre.name %>
+                            </label>
+                        </div>
+                    <% }) %>
+                <% if (errors) { %>
+                    <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -5px;">
+                        <li>
+                            <% errors.forEach(error => { %>
+                                <% if (error.param === 'genre') { %>
+                                    <div><small><%= error.msg %></small></div>
+                                <% } %>
+                            <% }) %>   
+                        </li>
+                    </ul> 
+                <% } %>
+            </div>
+            <% if (editing) { %>
+             <input type="hidden" value=<%= book._id %> name="bookid" >
+            <% } %>
+            <button class="btn" type="submit"> <% if (editing) { %>
+                Update Book
+                <% } else { %>
+                Create Book
+                <% } %>
+            </button>
+
+        </form>
+        
+    </main>
+<%- include('../includes/end.ejs') %>

@@ -1,0 +1,40 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigations.ejs') %>
+    <main>
+        <h1><%= text %></h1>
+        <h2>Genre: <%= genre.name %> </h2>
+
+        <div style='margin-left:20px;margin-top:20px'>
+            <h4>Books:</h4>
+            <ul>
+                <% if (Object.keys(genre_books).length !== 0) { %>
+                    <% genre_books.forEach(book => { %>
+                        <li>
+                            <div>
+                                <a href=" <%= book.url %>  "><%= book.title %> </a>
+                            </div>
+                            <div>
+                                <%= book.summary %> 
+                            </div>
+                        </li>    
+                    <% }) %>
+                
+                <% } else { %>
+                    <p style="color:red">Has no books in this genre!</p>
+                <% } %>
+            </ul>
+        </div>
+        <hr>
+        <div style="display: flex;">
+            <p>
+                <a style="margin-right: 1rem;" class="btn" href=" <%= genre.url+'/delete' %> ">Delete</a>
+            </p>
+            <p>
+                <a class="btn" href=" <%= genre.url+'/update' %> ">Update</a>
+            </p>
+        </div>
+    </main>
+    
+<%- include('../includes/end.ejs') %> 

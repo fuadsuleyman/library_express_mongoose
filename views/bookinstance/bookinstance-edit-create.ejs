@@ -1,0 +1,115 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+
+<body>
+    <%- include('../includes/navigations.ejs') %>
+    <main>
+        <h1><%= pageTitle %> </h1>
+        <form class="product-form" action="" method="POST">
+            <div class="form-control">
+                <label for="book">Book</label>
+                <select type="select" name="book" id="book" placeholder='Select book' required='true' value="<% if (editing || errors) { %> <%= bookinstance.book.title %>  <% } %>">
+                    <% if (!editing) { %>
+                        <% book_list.sort(function(a, b) {let textA = a.title.toUpperCase(); let textB = b.title.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;}); %>
+                    <% } %>
+                    <% book_list.forEach(book => { %>
+                        <% if (editing && book.title===bookinstance.book.title) { %>
+                            <option value="<%= book._id %>" selected='selected'> <%= bookinstance.book.title %> </option>
+                        <% } else { %>
+                        <option value="<%= book._id %> %>"> <%= book.title %> </option>
+                        <% } %>
+                    <% }) %> 
+                </select>
+                <% if (errors) { %>
+                    <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -5px;">
+                        <li>
+                            <% errors.forEach(error => { %>
+                                <% if (error.param === 'book') { %>
+                                    <div><small><%= error.msg %></small></div>
+                                <% } %>
+                            <% }) %>   
+                        </li>
+                    </ul> 
+                <% } %>
+            </div>
+            <div class="form-control">
+                <label for="imprint">Imprint</label>
+                <input type="text" name="imprint" id="imprint" placeholder='Publisher and date information' required='true' value="<% if (editing || errors) { %> <%= bookinstance.imprint %>  <% } %>" >
+                <% if (errors) { %>
+                    <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -5px;">
+                        <li>
+                            <% errors.forEach(error => { %>
+                                <% if (error.param === 'imprint') { %>
+                                    <div><small><%= error.msg %></small></div>
+                                <% } %>
+                            <% }) %>   
+                        </li>
+                    </ul> 
+                <% } %>
+            </div>
+            <div class="form-control">
+                <label for="due_back">Date when book available</label>
+                <input type="date" name="due_back" id="due_back" required='true' value="<% if (editing || errors) { %> <%= bookinstance.due_back %>  <% } %>" >
+                <% if (errors) { %>
+                    <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -5px;">
+                        <li>
+                            <% errors.forEach(error => { %>
+                                <% if (error.param === 'due_back') { %>
+                                    <div><small><%= error.msg %></small></div>
+                                <% } %>
+                            <% }) %>   
+                        </li>
+                    </ul> 
+                <% } %>
+            </div>
+            <div class="form-control">
+                <label for="status">Status</label>
+                <select type="select" name="status" id="author" placeholder='Select status' required='true' value="<% if (editing || errors) { %> <%= bookinstance.status %>  <% } %>">
+                    <% if (editing) { %>
+                        <option value="<%= bookinstance.status %>" selected='selected' ><%= bookinstance.status %></option>
+                        <option value="Maintenance" <% if (bookinstance.status==='Maintenance') { %>
+                            style="display: none;"
+                        <% } %> >Maintenance</option>      
+                        <option value="Available" <% if (bookinstance.status==='Available') { %>
+                            style="display: none;"
+                        <% } %> >Available</option>      
+                        <option value="Reserved" <% if (bookinstance.status==='Reserved') { %>
+                            style="display: none;"
+                        <% } %> >Reserved</option>
+                        <option value="Loaned" <% if (bookinstance.status==='Loaned') { %>
+                            style="display: none;"
+                        <% } %> >Loaned</option>
+                    <% } else { %>    
+                        <option value="Maintenance" >Maintenance</option>      
+                        <option value="Available" >Available</option>      
+                        <option value="Reserved" >Reserved</option>
+                        <option value="Loaned" >Loaned</option>
+                    <% } %>   
+                </select>
+                <% if (errors) { %>
+                    <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -5px;">
+                        <li>
+                            <% errors.forEach(error => { %>
+                                <% if (error.param === 'status') { %>
+                                    <div><small><%= error.msg %></small></div>
+                                <% } %>
+                            <% }) %>   
+                        </li>
+                    </ul> 
+                <% } %>
+            </div>
+            <% if (editing) { %>
+             <input type="hidden" value=<%= bookinstance._id %> name="bookinstanceid" >
+            <% } %>
+            <button class="btn" type="submit"> <% if (editing) { %>
+                Update Author
+                <% } else { %>
+                Create Author
+                <% } %>
+            </button>
+
+        </form>
+        
+    </main>
+<%- include('../includes/end.ejs') %>

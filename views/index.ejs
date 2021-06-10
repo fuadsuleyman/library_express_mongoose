@@ -1,0 +1,21 @@
+<%- include('includes/head.ejs') %>
+</head>
+<body>
+    <%- include('includes/navigations.ejs') %>
+    <main>
+        <h1><%= text %></h1>
+        <p>Welcome to <em>LocalLibrary</em>, a very basic Express website</p>
+        <% if (error) { %>
+        <h2>Something went wrong!</h2>
+        <% } else { %>
+        <h2>The library has the following record counts:</h2>
+        <ul>
+            <li>Book count: <%= data.book_count %> </li>
+            <li>Bookinstance count: <%= data.bookinstance_count %> </li>
+            <li>Bookinstance avaible count: <%= data.bookinstance_avaible_count %> </li>
+            <li>Genre count: <%= data.genre_count %> </li>
+            <li>Author count: <%= data.author_count %> </li>
+        </ul>
+        <% } %>
+    </main>
+<%- include('includes/end.ejs') %>

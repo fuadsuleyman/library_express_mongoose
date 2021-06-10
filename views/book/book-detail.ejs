@@ -1,0 +1,54 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigations.ejs') %>
+    <main>
+        <% if (book) { %>
+            <h1>Book: <%= book.title %> </h1>
+            <p><strong>Author: </strong> <a href=" <%= book.author.url %> "> <%= book.author.name %>  </a></p>
+            <p><strong>Summary: </strong> <%= book.summary %> </p>
+            <p><strong>ISBN: </strong> <%= book.isbn %> </p>
+            <p><strong>Genre: </strong>
+                <% for( let index = 0; index < book.genre.length; index++ ) { %>
+                    <a href=" <%= book.genre[index].url %> "><%= book.genre[index].name %> <% if (index < book.genre.length-1) { %>
+                        |
+                    <% } %></a>
+                <% } %>
+            </p>
+            <div style='margin-left:20px;margin-top:20px'>
+                <h4>Copies:</h4>
+                <% if (Object.keys(book_instances).length !== 0) { %>
+                    <% book_instances.forEach(bookins => { %> 
+                        <hr>
+                        <% if (bookins.status == 'Available') { %>
+                            <p class="text-success"><%= bookins.status %> </p>
+                        <% } else if (bookins.status == 'Maintenance') { %>
+                            <p class="text-danger"><%= bookins.status %> </p>
+                        <% } else if (bookins.status === 'Loaned') { %>
+                            <p class="text-warning"><%= bookins.status %> </p>
+                        <% } else { %>
+                            <p class="text-reserved"><%= bookins.status %> </p>
+                        <% } %> 
+                        <p><strong><%= bookins.imprint %> </strong></p>
+                        <% if (bookins.status !== 'Available') { %>
+                            <p><strong><%= bookins.due_back_formatted %> </strong></p>
+                        <% } %>
+                        <p><strong><a href=" <%= bookins.url %> "></a> Id: <%= bookins._id %> </strong></p>
+                    <% }) %>
+                <% } else { %>
+                    <p style="color:red">This book has no copies!</p>
+                <% } %>
+            </div>
+            <hr>
+            <div style="display: flex;">
+                <p>
+                    <a class="btn" href=" <%= book.url+'/delete' %> " style="margin-right: 1rem;">Delete</a>
+                </p>
+                <p>
+                    <a class="btn" href=" <%= book.url+'/update' %> ">Update</a>
+                </p>
+            </div>
+        <% } %>
+    </main>
+    
+<%- include('../includes/end.ejs') %> 

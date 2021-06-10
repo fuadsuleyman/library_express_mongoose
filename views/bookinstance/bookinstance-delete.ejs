@@ -1,0 +1,22 @@
+<%- include('../includes/head.ejs'); %>
+</head>
+<body>
+    <%- include('../includes/navigations.ejs') %>
+<main>
+    <h1><%= pageTitle %></h1>
+
+    <p>
+        <span>
+            <p>Do you really want to delete this book (<%= bookinstance.book.title %>) instance (<a href="<%= bookinstance.url %>"><%= bookinstance._id %></a>) Genre?</p>
+            <form action="" method="POST">
+                <div class="form-control">
+                    <input type="hidden" required='true' name='bookinstanceid' value=<%= bookinstance._id %> >
+                    <button class="btn" type="submit">Delete</button>
+                </div>
+            </form>
+        </span>
+    </p>
+</main>
+    
+    
+<%- include('../includes/end.ejs') %> 

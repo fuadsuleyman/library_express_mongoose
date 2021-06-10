@@ -1,0 +1,35 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+<body>
+    <%- include('../includes/navigations.ejs') %>
+    <main>
+        <h1><%= pageTitle %> </h1>
+        <form class="product-form" action="" method="POST">
+            <div class="form-control">
+                <label for="name">Genre Name</label>
+                <input type="text" name="name" id="name" value="<% if (editing) { %> <%= genre.name %>  <% } %>" >
+            </div>
+            <% if (editing) { %>
+             <input type="hidden" value=<%= genre._id %> name="genreid"  >
+            <% } %>
+            <% if (errors) { %>
+                <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -20px; margin-bottom: 1rem;">
+                   <% errors.forEach(error => { %>
+                       <li>
+                           <small><%= error.msg %></small>  
+                       </li>     
+                   <% }) %> 
+                </ul> 
+            <% } %>
+            <button class="btn" type="submit"> <% if (editing) { %>
+                Update Genre
+                <% } else { %>
+                Create Genre
+                <% } %>
+            </button>
+
+        </form>
+        
+    </main>
+<%- include('../includes/end.ejs') %>

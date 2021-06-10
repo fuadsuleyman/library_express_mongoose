@@ -1,0 +1,29 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+    <%- include('../includes/navigations.ejs') %>
+    <main>
+        <h1><%= text %></h1>
+        <ul>
+            <% if (bookinstances) { %>
+                <% bookinstances.forEach(bookins => { %>
+                    <li>
+                        <a href="<%= bookins.url %>"><%= bookins.book.title %> : <%= bookins.imprint %></a>
+                        - <% if (bookins.status === 'Available') { %>
+                            <span class="text-succes"><%= bookins.status %> </span>
+                        <% } else if (bookins.status === 'Maintenance') { %>
+                            <span class="text-danger"><%= bookins.status %> (DUE: <%= bookins.due_back_formatted %> )</span>
+                        <% } else if (bookins.status === 'Loaned') { %>
+                            <span class="text-warning"><%= bookins.status %> (DUE: <%= bookins.due_back_formatted %> )</span>
+                        <% } else { %>
+                            <span class="text-reserved"><%= bookins.status %> (DUE: <%= bookins.due_back_formatted %> )</span>
+                        <% } %>
+                    </li>
+                <% }); %> 
+        
+            <% } else { %>
+                <li>There is no books!</li>
+            <% } %>
+        </ul>
+    </main>
+<%- include('../includes/end.ejs') %> 

@@ -1,0 +1,67 @@
+<div class="backdrop"></div>
+<header class="main-header">
+    <button id="side-menu-toggle">Menu</button>
+    <nav class="main-header__nav">
+        <ul class="main-header__item-list">
+            <li class="main-header__item">
+                <a class="<%= path === '/catalog' ? 'active' : '' %>" href="/catalog">Home</a>
+            </li>
+            <li class="main-header__item">
+                <a class="<%= path === '/catalog/books' ? 'active' : '' %>" href="/catalog/books">Books</a>
+            </li>
+            <li class="main-header__item">
+                <a class="<%= path === '/catalog/authors' ? 'active' : '' %>" href="/catalog/authors">Authors</a>
+            </li>
+            <li class="main-header__item">
+                <a class="<%= path === '/catalog/bookinstances' ? 'active' : '' %>" href="/catalog/bookinstances">Copies</a>
+            </li>
+            <li class="main-header__item">
+                <a class="<%= path === '/catalog/genres' ? 'active' : '' %>" href="/catalog/genres">Genres</a>
+            </li>
+            <li class="main-header__item">
+                <a class="<%= path === '/catalog/book/create' ? 'active' : '' %>" href="/catalog/book/create">Add Book</a>
+            </li>
+            <li class="main-header__item">
+                <a class="<%= path === '/catalog/author/create' ? 'active' : '' %>" href="/catalog/author/create">Add Author</a>
+            </li>
+            <li class="main-header__item">
+                <a class="<%= path === '/catalog/bookinstance/create' ? 'active' : '' %>" href="/catalog/bookinstance/create">Add Copy</a>
+            </li>
+            <li class="main-header__item">
+                <a class="<%= path === '/catalog/genre/create' ? 'active' : '' %>" href="/catalog/genre/create">Add Genre</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<nav class="mobile-nav">
+    <ul class="mobile-nav__item-list">
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/catalog' ? 'active' : '' %>" href="/catalog">Home</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/catalog/books' ? 'active' : '' %>" href="/catalog/books">Books</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/catalog/book/create' ? 'active' : '' %>" href="/catalog/book/create">Add Book</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/catalog/authors' ? 'active' : '' %>" href="/catalog/authors">Authors</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/catalog/author/create' ? 'active' : '' %>" href="/catalog/author/create">Add Author</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/catalog/bookinstances' ? 'active' : '' %>" href="/catalog/bookinstances">Copies</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/catalog/bookinstance/create' ? 'active' : '' %>" href="/catalog/bookinstance/create">Add Copy</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/catalog/genres' ? 'active' : '' %>" href="/catalog/genres">Genres</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/catalog/genre/create' ? 'active' : '' %>" href="/catalog/genre/create">Add Genre</a>
+        </li>
+    </ul>
+</nav>

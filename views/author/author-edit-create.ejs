@@ -1,0 +1,80 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+</head>
+<body>
+    <%- include('../includes/navigations.ejs') %>
+    <main>
+        <h1><%= pageTitle %> </h1>
+        <form class="product-form" action="" method="POST">
+            <div class="form-control">
+                <label for="first-name">First Name</label>
+                <input type="text" name="first_name" id="first-name" placeholder='First Name (Fuad)' required='true' value="<% if (editing || errors) { %> <%= author.first_name %>  <% } %>" >
+                <% if (errors) { %>
+                    <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -5px;">
+                        <li>
+                            <% errors.forEach(error => { %>
+                                <% if (error.param === 'first_name') { %>
+                                    <div><small><%= error.msg %></small></div>
+                                <% } %>
+                            <% }) %>   
+                        </li>
+                    </ul> 
+                <% } %>
+            </div>
+            <div class="form-control">
+                <label for="family-name">Family Name</label>
+                <input type="text" name="family_name" id="family-name" placeholder='Surename (Suleymanov)' required='true' value="<% if (editing || errors) { %> <%= author.family_name %>  <% } %>" >
+                <% if (errors) { %>
+                    <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -5px;">
+                        <li>
+                            <% errors.forEach(error => { %>
+                                <% if (error.param === 'family_name') { %>
+                                    <div><small><%= error.msg %></small></div>
+                                <% } %>
+                            <% }) %>   
+                        </li>
+                    </ul> 
+                <% } %>
+            </div>
+            <div class="form-control">
+                <label for="date-of-birth">Date of birth</label>
+                <input type="date" name="date_of_birth" id="date-of-birth" required='true' value="<% if (editing || errors) { %> <%= author.date_of_birth %>  <% } %>" >
+                <% if (errors) { %>
+                    <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -5px;">
+                        <li>
+                            <% errors.forEach(error => { %>
+                                <% if (error.param === 'date_of_birth') { %>
+                                    <div><small><%= error.msg %></small></div>
+                                <% } %>
+                            <% }) %>   
+                        </li>
+                    </ul> 
+                <% } %>
+            </div>
+            <div class="form-control">
+                <label for="date-of-death">Date of death</label>
+                <input type="date" name="date_of_death" id="date-of-death" value="<% if (editing || errors) { %> <%= author.date_of_death %>  <% } %>" >
+                <% if (errors) { %>
+                    <ul style="margin: auto; text-decoration: none; list-style-type: none; color: red; margin-left: -35px; margin-top: -5px;">
+                        <li>
+                            <% errors.forEach(error => { %>
+                                <% if (error.param === 'date_of_death') { %>
+                                    <div><small><%= error.msg %></small></div>
+                                <% } %>
+                            <% }) %>   
+                        </li>
+                    </ul> 
+                <% } %>
+            </div>
+            <% if (editing) { %>
+             <input type="hidden" value=<%= author._id %> name="authorid" >
+            <% } %>
+            <button class="btn" type="submit"> <% if (editing) { %>
+                Update Author
+                <% } else { %>
+                Create Author
+                <% } %>
+            </button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>
